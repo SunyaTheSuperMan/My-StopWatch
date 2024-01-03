@@ -1,28 +1,32 @@
 package com.example.mystopwatch;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.ListView;
 import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private Chronometer chronometer;
-    private TextView laptext;
-    private ToggleButton toggleButton;
-    private ImageButton btnlap, reset;
-
+    private ImageButton btnReset, btnLap;
+    private ListView lapListView;
+    private ToggleButton btnStartPause;
     private boolean isRunning = false;
-    private long  startTime, elapsedTime;
-    private int lapCount = 1;
+    private long startTime, elapsedTime;
 
     private final Handler handler = new Handler();
+    private ArrayList<String> lapList;
+    private ArrayAdapter<String> lapAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,42 +34,47 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         chronometer = findViewById(R.id.chronometer);
-        laptext = findViewById(R.id.laptext);
-        toggleButton = findViewById(R.id.toggelbutton);
-        reset = findViewById(R.id.reset);
-        btnlap = findViewById(R.id.btnlap);
+        btnStartPause = findViewById(R.id.btnStartPause);
+        btnReset = findViewById(R.id.btnReset);
+        btnLap = findViewById(R.id.btnLap);
+        lapListView = findViewById(R.id.laplistView);
 
-        toggleButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        lapList = new ArrayList<>();
+        lapAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lapList);
+        lapListView.setAdapter(lapAdapter);
+
+        btnStartPause.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                // Start the stopwatch
                 isRunning = true;
                 startTime = SystemClock.elapsedRealtime() - elapsedTime;
                 handler.postDelayed(updateTimer, 0);
             } else {
-                // Pause the stopwatch
                 isRunning = false;
                 elapsedTime = SystemClock.elapsedRealtime() - startTime;
                 handler.removeCallbacks(updateTimer);
             }
         });
 
-        reset.setOnClickListener(v -> {
-            // Reset the stopwatch
-            isRunning = false;
-            toggleButton.setChecked(false);
-            elapsedTime = 0;
-            handler.removeCallbacks(updateTimer);
-            updateUI();
-        });
-
-        btnlap.setOnClickListener(new View.OnClickListener() {
+        btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isRunning = false;
+                elapsedTime = 0;
+                handler.removeCallbacks(updateTimer);
+                updateUI();
+                lapList.clear();
+                lapAdapter.notifyDataSetChanged();
+            }
+        });
 
-                if (isRunning){
-                    String lapTime = String.format("Lap %d: %s", lapCount, chronometer.getText());
-                    lapCount++;
-                    laptext.setText(String.valueOf(lapTime));
+        btnLap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isRunning) {
+                    // Display lap time in a ListView or handle as needed
+                    String lapTime = chronometer.getText().toString();
+                    lapList.add("Lap " + lapList.size() + ": " + lapTime);
+                    lapAdapter.notifyDataSetChanged();
                 }
             }
         });
@@ -89,6 +98,5 @@ public class MainActivity extends AppCompatActivity {
 
         String timerText = String.format("%02d:%02d:%03d", minutes, seconds, milliseconds);
         chronometer.setText(timerText);
-
     }
 }

@@ -23,33 +23,33 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
         android:layout_centerInParent="true"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="50dp"
         android:format="%s"
         android:text="00:00:00"
         android:textColor="#000"
         android:textSize="60sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/laptext"
+    <ListView
+        android:id="@+id/laplistView"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="350dp"
         android:layout_below="@id/chronometer"
         android:layout_alignParentStart="true"
         android:layout_marginStart="50dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="50dp"
         android:textColor="#000"
-        android:textSize="30dp" />
+        android:textSize="40dp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="80dp"
-        android:layout_below="@id/laptext"
+        android:layout_below="@id/laplistView"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="50dp"
         android:orientation="horizontal"
         app:cardBackgroundColor="@color/white"
@@ -57,7 +57,7 @@
         app:cardElevation="2dp">
 
         <ImageButton
-            android:id="@+id/reset"
+            android:id="@+id/btnReset"
             android:layout_width="75dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
@@ -66,7 +66,7 @@
 
 
         <ToggleButton
-            android:id="@+id/toggelbutton"
+            android:id="@+id/btnStartPause"
             android:layout_width="75dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -78,7 +78,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/btnlap"
+            android:id="@+id/btnLap"
             android:layout_gravity="right"
             android:layout_marginRight="15dp"
             android:background="@drawable/laps"/>
