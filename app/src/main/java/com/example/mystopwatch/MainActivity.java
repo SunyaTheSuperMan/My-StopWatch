@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isRunning = false;
+                btnStartPause.setChecked(false);
                 elapsedTime = 0;
                 handler.removeCallbacks(updateTimer);
                 updateUI();
