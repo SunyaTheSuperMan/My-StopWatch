@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:id="@+id/title"
         android:text="  StopWatch"
@@ -16,6 +16,13 @@
         android:textStyle="bold"
         android:textSize="40dp"/>
 
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/setting"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="330dp"
+        android:background="@drawable/settings"/>
 
     <Chronometer
         android:id="@+id/chronometer"
@@ -32,42 +39,55 @@
 
     <ListView
         android:id="@+id/laplistView"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="350dp"
         android:layout_below="@id/chronometer"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="50dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="26dp"
         android:textColor="#000"
         android:textSize="40dp" />
 
+
+    <ImageButton
+        android:id="@+id/btnReset"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="15dp"
+        android:contentDescription="@string/app_name"
+        android:layout_below="@id/laplistView"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="65dp"
+        android:background="@drawable/restore" />
+
+
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/btnLap"
+        android:layout_gravity="right"
+        android:layout_marginRight="65dp"
+        android:layout_below="@+id/laplistView"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/laps"/>
+
+
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_below="@id/laplistView"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="150dp"
         android:orientation="horizontal"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="12dp"
+        app:cardCornerRadius="40dp"
         app:cardElevation="2dp">
-
-        <ImageButton
-            android:id="@+id/btnReset"
-            android:layout_width="75dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:contentDescription="@string/app_name"
-            android:background="@drawable/restore" />
-
 
         <ToggleButton
             android:id="@+id/btnStartPause"
-            android:layout_width="75dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:textOff=""
@@ -75,13 +95,6 @@
             android:background="@drawable/play_pause_btn"
             android:contentDescription="@string/app_name" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/btnLap"
-            android:layout_gravity="right"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/laps"/>
 
 
     </androidx.cardview.widget.CardView>
